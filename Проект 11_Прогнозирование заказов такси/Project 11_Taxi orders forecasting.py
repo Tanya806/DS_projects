@@ -22,7 +22,7 @@
 
 # ## Подготовка
 
-# In[1]:
+# In[2]:
 
 
 import pandas as pd
@@ -62,7 +62,7 @@ print('Пропуски в исходной выборке, всего: ', gaps)
 
 # ### Выполним его ресемплирование и посчитаем скользащее среднее.
 
-# In[2]:
+# In[3]:
 
 
 df_hour = df_taxi.resample('1H').sum()
@@ -120,7 +120,7 @@ plt.show()
 
 # #### Аддетивная модель по дням
 
-# In[3]:
+# In[4]:
 
 
 decomposed = seasonal_decompose(df_day['2018-03-10':'2018-09'], model ='additive')
@@ -144,7 +144,7 @@ plt.show()
 
 # 
 
-# In[4]:
+# In[5]:
 
 
 plt.figure(figsize=(6, 8))
@@ -165,7 +165,7 @@ plt.tight_layout()
 
 # #### Мультипликативная модель по дням
 
-# In[5]:
+# In[6]:
 
 
 decomposed = seasonal_decompose(df_day['2018-03-10':'2018-09'], model = 'multiplicative')
@@ -177,7 +177,7 @@ decomposed.seasonal['2018-03-12':'2018-03-25'].plot()
 plt.title('Seasonality за 2 недели: с 12 марта 2018 (пн) по 25 марта 2018 (вс)')
 
 
-# In[6]:
+# In[7]:
 
 
 plt.figure(figsize=(6, 8))
@@ -208,7 +208,7 @@ plt.tight_layout()
 
 # #### Аддетивная модель по часам
 
-# In[7]:
+# In[8]:
 
 
 decomposed = seasonal_decompose(df_hour['2018-03-02':'2018-09'], model ='additive')
@@ -227,7 +227,7 @@ plt.title('Seasonality за 2 дня: c 18 марта 2018 (вс) и за 19 м�
 plt.show()
 
 
-# In[8]:
+# In[9]:
 
 
 #NEW_20.01.2022
@@ -305,7 +305,7 @@ plt.show()
 
 # ### Исследуем разности временного ряда (для ресемплирования 1 день и для ресемлирования 1 час)
 
-# In[9]:
+# In[10]:
 
 
 df_day_sub = df_day - df_day.shift()
@@ -319,9 +319,10 @@ plt.show()
 # <b>Вывод</b>
 # 
 # После преобразования временной ряд стал более стационарным.
+# 
 # </div>
 
-# In[10]:
+# In[11]:
 
 
 df_hour_sub = df_hour - df_hour.shift()
@@ -343,15 +344,13 @@ plt.show()
 # После преобразования временной ряд стал более стационарным.
 # </div>
 
-# 
-
 # ## Обучение
 
 # ### По дням
 
 # ### Создадим признаки для модели
 
-# In[11]:
+# In[12]:
 
 
 def make_features(data, max_lag, rolling_mean_size):
@@ -416,7 +415,7 @@ print(df_day.head())
 
 # #### Разобьем датасет на обучающую и тестовую выборки
 
-# In[12]:
+# In[13]:
 
 
 train, test = train_test_split(df_day, shuffle=False, test_size=0.2)
@@ -434,7 +433,7 @@ print('Test: ', test.shape)
 
 # #### Выделим целевой признак и признаки для обучения
 
-# In[13]:
+# In[14]:
 
 
 features_train = train.drop(['num_orders','mean','std'], axis = 1) #Изменено 20.01.2022
@@ -443,25 +442,25 @@ features_test = test.drop(['num_orders','mean','std'], axis=1) #Изменено
 target_test = test['num_orders']
 
 
-# In[14]:
+# In[15]:
 
 
 train
 
 
-# In[15]:
+# In[16]:
 
 
 features_train
 
 
-# In[16]:
+# In[17]:
 
 
 test.head(5)
 
 
-# In[17]:
+# In[18]:
 
 
 features_test.head(5)
@@ -469,7 +468,7 @@ features_test.head(5)
 
 # #### Обучим модель линейной регрессии
 
-# In[18]:
+# In[19]:
 
 
 model = LinearRegression() 
@@ -480,7 +479,7 @@ prediction_test = model.predict(features_test)
 
 # #### Расчитаем MAE и RMSE стационарного ряда
 
-# In[19]:
+# In[20]:
 
 
 MAE_train = mean_absolute_error(train['num_orders'], prediction_train)
@@ -508,7 +507,7 @@ print("RMSE тестовой выборки: ", rmse_test)
 
 # #### Создадим признаки для модели
 
-# In[20]:
+# In[21]:
 
 
 df_hour['hour'] = df_hour.index.hour #дополнительный признак по часам #Изменено 20.01.2022
@@ -518,7 +517,7 @@ print(df_hour.head())
 
 # #### Разобьем датасет на обучающую и тестовую выборки
 
-# In[21]:
+# In[22]:
 
 
 train, test = train_test_split(df_hour, shuffle=False, test_size=0.2)
@@ -536,7 +535,7 @@ print('Test: ', test.shape)
 
 # #### Выделим целевой признак и признаки для обучения
 
-# In[22]:
+# In[23]:
 
 
 features_train = train.drop(['num_orders','mean','std'], axis = 1)
@@ -545,25 +544,25 @@ features_test = test.drop(['num_orders','mean','std'], axis=1)
 target_test = test['num_orders']
 
 
-# In[23]:
+# In[24]:
 
 
 train
 
 
-# In[24]:
+# In[25]:
 
 
 features_train.head(5)
 
 
-# In[25]:
+# In[26]:
 
 
 test
 
 
-# In[26]:
+# In[27]:
 
 
 features_test.head(5)
@@ -571,7 +570,7 @@ features_test.head(5)
 
 # #### Обучим модель линейной регрессии
 
-# In[27]:
+# In[28]:
 
 
 model = LinearRegression() 
@@ -582,7 +581,7 @@ prediction_test = model.predict(features_test)
 
 # #### Расчитаем MAE и RMSE
 
-# In[28]:
+# In[29]:
 
 
 MAE_train = mean_absolute_error(train['num_orders'], prediction_train)
@@ -614,7 +613,7 @@ print("RMSE тестовой выборки: ", rmse_test)
 
 # #### Визуализация модели линейной регрессии
 
-# In[29]:
+# In[30]:
 
 
 ## train['num_orders'], prediction_train
