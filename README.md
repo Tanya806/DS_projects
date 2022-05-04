@@ -16,7 +16,8 @@ There is historical data on taxi orders at airports. To attract more drivers dur
 #### Technology stack
 `Python` `Pandas` `matplotlib` `numpy` `TimeSeriesSplit` `machine learning` `data resampling` `data chronology` `time series decomposition into trend and seasonal components` `additional calendar features` `Logistic Regression` `Decision Tree` `Random Forest` `LightGBM` `CatBoost` `Dummy Regressor` `Hyperparameter matching` `RMSE metric` `Feature importance factor`
 
-## 10. [Оценка стоимости автомобилей](https://github.com/Tanya806/DS_projects_eng/tree/main/Project%2010_Car%20Price%20Prediction%20Model)
+## 10. [Car price valuation]
+(https://github.com/Tanya806/DS_projects_eng/tree/main/Project%2010_Car%20Price%20Prediction%20Model)
 #### Brief description
 Selection and training model to determine the market value of used cars.
 
@@ -79,7 +80,7 @@ Definition of the market value of real estate objects based on the basic paramet
 #### Technology stack
 `Python` `Pandas` `data preprocessing` `exploratory data analysis` `data visualization` `range plot` `histograms` `Poisson distribution` `correlation matrix`
 
-## 1. [Research on the reliability of borrowers](https://github.com/Tanya806/DS_projects_eng/tree/main/Project%201_Research%20on%20the%20reliability%20of%20borrowers)
+## 1. [Research on the reliability of borrowers](https://github.com/Tanya806/DS_projects/tree/main/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%201_%D0%98%D1%81%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BD%D0%B0%D0%B4%D1%91%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D0%B8%20%D0%B7%D0%B0%D1%91%D0%BC%D1%89%D0%B8%D0%BA%D0%BE%D0%B2)
 
 #### Brief description
 Evaluating the borrower's risk of defaulting. Finding possible causes of loan defaulting in bank customers data. Proposing a preferable client for the bank to take a loan.
